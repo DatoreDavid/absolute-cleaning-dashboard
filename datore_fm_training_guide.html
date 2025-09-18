@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities Management Training Kit for SDRs | Datore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Darker Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #12224B;
+            background: #FBF9FF;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #12224B 0%, #1e3c72 100%);
+            color: white;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(115, 239, 150, 0.1));
+            transform: skewX(-15deg) translateX(50px);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 32px;
+            font-weight: 600;
+            color: #73EF96;
+        }
+        
+        .title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            color: #73EF96;
+            font-weight: 500;
+            background: rgba(115, 239, 150, 0.1);
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            border: 1px solid rgba(115, 239, 150, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .table-of-contents {
+            background: white;
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(18, 34, 75, 0.1);
+            border-top: 4px solid #73EF96;
+        }
+        
+        .toc-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #12224B;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .toc-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #73EF96, #58D3C1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .toc-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+            list-style: none;
+        }
+        
+        .toc-item {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #73EF96;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-item:hover {
+            background: rgba(115, 239, 150, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .toc-item a {
+            color: #12224B;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .section {
+            background: white;
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(18, 34, 75, 0.1);
+            border-top: 4px solid #73EF96;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #12224B;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #73EF96, #58D3C1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .section-content {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(115, 239, 150, 0.1), rgba(88, 211, 193, 0.1));
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(115, 239, 150, 0.3);
+            margin: 25px 0;
+        }
+        
+        .highlight-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #12224B;
+            margin-bottom: 10px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #73EF96;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #12224B;
+            margin-bottom: 12px;
+        }
+        
+        .card-content {
+            font-size: 15px;
+            color: #555;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #12224B, #1e3c72);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(115, 239, 150, 0.2));
+            transform: skewX(-15deg) translateX(20px);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #73EF96;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #73EF96, #58D3C1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text {
+            font-size: 16px;
+            color: #12224B;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #12224B;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .comparison-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .datore-column {
+            background: rgba(115, 239, 150, 0.1) !important;
+            border-left: 3px solid #73EF96;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: #73EF96;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .cross-icon {
+            background: #dc3545;
+        }
+        
+        .question-group {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #73EF96;
+        }
+        
+        .question-group-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #12224B;
+            margin-bottom: 15px;
+        }
+        
+        .question-list {
+            list-style: none;
+        }
+        
+        .question-item {
+            margin: 12px 0;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #12224B;
+            border-left: 3px solid #58D3C1;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #12224B, #1e3c72);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%2373EF96" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%2373EF96" opacity="0.1"/><circle cx="50" cy="50" r="1" fill="%2373EF96" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .cta-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        .cta-highlight {
+            font-size: 24px;
+            font-weight: 600;
+            color: #73EF96;
+            background: rgba(115, 239, 150, 0.1);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid rgba(115, 239, 150, 0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .title {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 20px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">‹</div>
+                <div class="logo-text">datore</div>
+            </div>
+            <h1 class="title">Facilities Management Training Kit for SDRs</h1>
+            <p class="subtitle">Master the FM industry and position Datore as the game-changing analytics solution</p>
+            <div class="tagline">Your New Data Team, On-Demand</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table-of-contents">
+            <h2 class="toc-title">
+                <div class="toc-icon">📋</div>
+                Table of Contents
+            </h2>
+            <ol class="toc-list">
+                <li class="toc-item"><a href="#what-is-fm">What is Facilities Management?</a></li>
+                <li class="toc-item"><a href="#fm-providers">FM Service Providers</a></li>
+                <li class="toc-item"><a href="#specialist-providers">Types of Specialist Providers</a></li>
+                <li class="toc-item"><a href="#market-size">Market Size & Opportunities</a></li>
+                <li class="toc-item"><a href="#decision-makers">Key Decision Makers</a></li>
+                <li class="toc-item"><a href="#pain-points">Common Pain Points</a></li>
+                <li class="toc-item"><a href="#datore-fit">How Datore Fits In</a></li>
+                <li class="toc-item"><a href="#terminology">Industry Terminology</a></li>
+                <li class="toc-item"><a href="#data-analytics">Understanding Data & Analytics</a></li>
+                <li class="toc-item"><a href="#data-to-insights">From Scattered Data to Insights</a></li>
+                <li class="toc-item"><a href="#enterprise-teams">How Big Companies Build Analytics Teams</a></li>
+                <li class="toc-item"><a href="#datore-power">Why Datore is So Powerful</a></li>
+                <li class="toc-item"><a href="#qualifying">Qualifying Questions</a></li>
+            </ol>
+        </div>
+
+        <section id="what-is-fm" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🏢</div>
+                What is Facilities Management?
+            </h2>
+            <div class="section-content">
+                <p><strong>Facilities Management (FM)</strong> integrates people, place, processes, and technology to ensure the functionality, comfort, safety, and efficiency of the built environment (a building or collection of buildings).</p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-text">Think of everyone it takes to keep a big office block running smoothly.</div>
+                </div>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">Core Functions Include:</h3>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text"><strong>M&E:</strong> HVAC, lighting, utilities management</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🧹</div>
+                        <div class="feature-text"><strong>Cleaning:</strong> Regular upkeep and repairs</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-text"><strong>Security:</strong> Access control, surveillance, safety protocols</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">📐</div>
+                        <div class="feature-text"><strong>Space Management:</strong> Office layouts, meeting rooms, workspace optimisation</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-text"><strong>Health & Safety:</strong> Compliance, risk management, emergency procedures</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🌱</div>
+                        <div class="feature-text"><strong>Sustainability:</strong> Energy efficiency, waste management, environmental compliance</div>
+                    </li>
+                </ul>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10-15%</div>
+                        <div class="stat-label">of total expenses</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">£117B</div>
+                        <div class="stat-label">UK market size</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3-5%</div>
+                        <div class="stat-label">annual growth</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fm-providers" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🏗️</div>
+                What is a Facilities Management Service Provider?
+            </h2>
+            <div class="section-content">
+                <p>A <strong>Facilities Management Service Provider</strong> is an external company that organisations use to manage some or all aspects of their physical facilities and workplace services.</p>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">1. Total Facilities Management (TFM) Providers</div>
+                        <div class="card-content">
+                            <p>• Manage multiple services under one contract</p>
+                            <p>• Examples: CBRE, ISS, Sodexo, Mitie</p>
+                            <p>• Handle everything from cleaning to major maintenance</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">2. Single-Service Specialists</div>
+                        <div class="card-content">
+                            <p>• Focus on one specific area of expertise</p>
+                            <p>• Examples: Commercial cleaning companies, security firms, HVAC contractors</p>
+                            <p>• Sometimes hired directly, sometimes subcontracted by TFM providers</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">Why Organisations Outsource:</h3>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-title">💰 Cost Reduction</div>
+                        <div class="card-content">Economies of scale, specialised expertise</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🎯 Focus on Core Business</div>
+                        <div class="card-content">Let experts handle non-core functions</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🚀 Access to Technology</div>
+                        <div class="card-content">Service providers (should) invest in latest tools/systems</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📋 Compliance</div>
+                        <div class="card-content">Specialists stay current with regulations</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">⚖️ Flexibility</div>
+                        <div class="card-content">Easier to scale services up or down</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specialist-providers" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🔧</div>
+                Types of Specialist Service Providers
+            </h2>
+            <div class="section-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">🧹 Cleaning & Hygiene Services</div>
+                        <div class="card-content">
+                            <p>• Office cleaning, deep cleaning, specialised cleaning</p>
+                            <p>• Waste management and recycling</p>
+                            <p>• Pest control, window cleaning</p>
+                            <p><strong>Our customers:</strong> Regular Cleaning, DOC</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🔒 Security Services</div>
+                        <div class="card-content">
+                            <p>• Manned security, surveillance systems</p>
+                            <p>• Access control, visitor management</p>
+                            <p>• Emergency response</p>
+                            <p><strong>Our customer:</strong> Corps Security</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">⚡ Technical Services / M&E</div>
+                        <div class="card-content">
+                            <p>• HVAC maintenance and repair</p>
+                            <p>• Electrical systems, plumbing</p>
+                            <p>• Fire safety systems</p>
+                            <p><strong>Key Players:</strong> Johnson Controls, Honeywell</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🌿 Grounds & Landscaping</div>
+                        <div class="card-content">
+                            <p>• Garden maintenance, lawn care</p>
+                            <p>• Snow removal, gritting</p>
+                            <p>• External building maintenance</p>
+                            <p><strong>Our customer:</strong> Q&S</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🍽️ Catering & Hospitality</div>
+                        <div class="card-content">
+                            <p>• Office catering, vending machines</p>
+                            <p>• Event management</p>
+                            <p>• Reception services</p>
+                            <p><strong>Our customer:</strong> Rapport</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="decision-makers" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">👥</div>
+                Key Decision Makers
+            </h2>
+            <div class="section-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">Large Organisations (£100M+)</div>
+                        <div class="card-content">
+                            <p><strong>Facilities Manager/Director:</strong> Day-to-day FM operations (for internal FM teams)</p>
+                            <p><strong>Head of Real Estate:</strong> Strategic property decisions</p>
+                            <p><strong>Procurement Manager:</strong> Vendor selection and contracts</p>
+                            <p><strong>Operations Director:</strong> Overall operational efficiency</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Smaller Organisations (£5M-£100M)</div>
+                        <div class="card-content">
+                            <p><strong>MD:</strong> Running the company</p>
+                            <p><strong>FD:</strong> Running the finance of the company</p>
+                            <p><strong>Operational Excellence:</strong> Looking after the service levels of the company</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-text">Secondary Influencers:</div>
+                    <p>Sustainability Manager (Environmental compliance) • IT Manager (Technology selection and integration)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pain-points" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">⚠️</div>
+                Common Pain Points
+            </h2>
+            <div class="section-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">🚨 Operational Challenges</div>
+                        <div class="card-content">
+                            <p>• Lack of real-time visibility into service delivery</p>
+                            <p>• Customers demanding better access to insights</p>
+                            <p>• No story to tell in tenders (around technology, innovation, futures)</p>
+                            <p>• Manual, paper-based processes in some cases</p>
+                            <p>• Data across the organisation in silo systems</p>
+                            <p>• Inconsistent service quality across locations / not able to benchmark</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">💸 Financial Pressures</div>
+                        <div class="card-content">
+                            <p>• Budget overruns and unexpected costs</p>
+                            <p>• Pressure to reduce facilities spend</p>
+                            <p>• Need to justify FM investment to senior management</p>
+                            <p>• Rising labour and material costs</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📊 Compliance & Reporting</div>
+                        <div class="card-content">
+                            <p>• Increasing ESG reporting requirements</p>
+                            <p>• Health & safety compliance</p>
+                            <p>• Environmental regulations</p>
+                            <p>• Necessary audit trail documentation</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">💻 The Technology Gap</div>
+                        <div class="card-content">
+                            <p>• Legacy systems that don't/can't integrate</p>
+                            <p>• Very limited data analytics capabilities (Excel only)</p>
+                            <p>• Poor mobile access for field teams</p>
+                            <p>• Need to start/continue digital transformation to survive</p>
+                            <p>• Inability to predict anything e.g. maintenance needs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="datore-fit" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🚀</div>
+                How Datore Fits In
+            </h2>
+            <div class="section-content">
+                <div class="cta-section">
+                    <div class="cta-content">
+                        <div class="cta-title">Your Data Team, On-Demand</div>
+                        <div class="cta-subtitle">Analytics as a Service for FM providers</div>
+                        <div class="cta-highlight">Enterprise-grade analytics without enterprise costs</div>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">What Datore Can Provide:</h3>
+                
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">📡</div>
+                        <div class="feature-text"><strong>IoT Integration:</strong> Connect sensors and devices for real-time monitoring</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🔮</div>
+                        <div class="feature-text"><strong>Predictive Analytics:</strong> Prevent equipment failures before they happen</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-text"><strong>Performance Dashboards:</strong> Real-time visibility into service delivery</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-text"><strong>Cost Optimisation:</strong> Identify savings opportunities through data analysis</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🌱</div>
+                        <div class="feature-text"><strong>ESG Reporting:</strong> Automated carbon tracking and sustainability metrics</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-text"><strong>Benchmarking:</strong> Understand best performance and up-level the worst</div>
+                    </li>
+                </ul>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">Target Customers for Datore:</h3>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">🎯 Primary Targets</div>
+                        <div class="card-content">
+                            <p>• <strong>FM Service Providers</strong> (like our existing customers DOC / Regular Cleaning)</p>
+                            <p>• <strong>Smaller TFM Providers</strong> looking to differentiate in the market-place with technology</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🎯 Secondary Targets</div>
+                        <div class="card-content">
+                            <p>• <strong>Corporate Facilities Teams</strong> (in-house FM departments)</p>
+                            <p>• <strong>Property Management Companies</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="data-analytics" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">📊</div>
+                Understanding Data & Analytics
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <div class="highlight-text">What is Data in a Business Context?</div>
+                    <p><strong>Data</strong> is any information that can be collected, stored, and analysed to help make business decisions. In facilities management, data comes from everywhere.</p>
+                </div>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">Types of Business Data:</h3>
+                
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-title">⚡ Operational Data</div>
+                        <div class="card-content">Service delivery times, completion rates, resource usage</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">💰 Financial Data</div>
+                        <div class="card-content">Costs, budgets, invoicing, contract values</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📈 Performance Data</div>
+                        <div class="card-content">KPIs, SLAs, quality scores, customer satisfaction</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🏗️ Asset Data</div>
+                        <div class="card-content">Equipment status, maintenance history, energy consumption</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🌡️ Environmental Data</div>
+                        <div class="card-content">Temperature, occupancy, air quality, energy usage</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📋 Compliance Data</div>
+                        <div class="card-content">Safety incidents, audit results, regulatory reporting</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <div class="highlight-text">The Problem with Data Today:</div>
+                    <p>Most organisations have <strong>data everywhere but insights nowhere</strong>: Excel spreadsheets scattered across teams • Different systems that don't talk to each other • Manual reporting that's always out of date • No single source of truth • Reactive decision-making based on gut feeling</p>
+                </div>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">What is Analytics?</h3>
+                <p><strong>Analytics</strong> is the process of bringing data together to examine and discover patterns, draw conclusions, and make informed decisions. It's turning raw data (from all those places across the business) into actionable insights (insights that lead to decisions being made).</p>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">Four Levels of Analytics:</h3>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">1. Descriptive Analytics - "What happened?"</div>
+                        <div class="card-content">
+                            <p>• Basic reporting and dashboards</p>
+                            <p>• Historical performance summaries</p>
+                            <p><em>Example: "We completed 95% of cleaning tasks last month"</em></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">2. Diagnostic Analytics - "Why did it happen?"</div>
+                        <div class="card-content">
+                            <p>• Root cause analysis</p>
+                            <p>• Correlation identification</p>
+                            <p><em>Example: "Cleaning delays were highest on Mondays due to weekend damage"</em></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">3. Predictive Analytics - "What will happen?"</div>
+                        <div class="card-content">
+                            <p>• Forecasting and trend analysis</p>
+                            <p>• Risk assessment</p>
+                            <p><em>Example: "HVAC system likely to fail in next 3 weeks based on vibration patterns"</em></p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">4. Prescriptive Analytics - "What should we do?"</div>
+                        <div class="card-content">
+                            <p>• Optimisation recommendations</p>
+                            <p>• Automated decision-making</p>
+                            <p><em>Example: "Reschedule cleaning team to optimise routes and reduce travel time by 20%"</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="datore-power" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">⚡</div>
+                Why Datore is So Powerful
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <div class="highlight-text">The "Analytics as a Service" Advantage</div>
+                    <p>Datore provides <strong>enterprise-grade analytics capabilities without the enterprise costs or complexity</strong>.</p>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Traditional Enterprise Approach</th>
+                            <th>Datore Analytics-as-a-Service</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>£350k-£2M+ upfront investment</td>
+                            <td class="datore-column">Start from £39,900 annually</td>
+                        </tr>
+                        <tr>
+                            <td>Hire 3-5 data specialists</td>
+                            <td class="datore-column">Get expert team included</td>
+                        </tr>
+                        <tr>
+                            <td>12-24 months to see results</td>
+                            <td class="datore-column">Value in 60-90 days</td>
+                        </tr>
+                        <tr>
+                            <td>Build everything custom</td>
+                            <td class="datore-column">Proven frameworks for FM</td>
+                        </tr>
+                        <tr>
+                            <td>Ongoing maintenance burden</td>
+                            <td class="datore-column">Fully managed service</td>
+                        </tr>
+                        <tr>
+                            <td>High risk of failure</td>
+                            <td class="datore-column">Guaranteed ROI model</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box">
+                    <div class="highlight-text">Real-World Example: ACS Cleaning Case Study</div>
+                    <p><strong>Challenge:</strong> ACS needed enterprise-level analytics to compete for large contracts, but couldn't justify £300k+ investment for a £340k annual contract.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">£39,900</div>
+                            <div class="stat-label">annual investment</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">312%</div>
+                            <div class="stat-label">ROI achieved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">£68,400</div>
+                            <div class="stat-label">annual savings</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">20x</div>
+                            <div class="stat-label">lower cost than in-house</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">For FM Service Providers</div>
+                        <div class="card-content">
+                            <p><em>"You can compete with the big players without their overheads"</em></p>
+                            <p>• Win larger contracts by demonstrating data-driven capabilities</p>
+                            <p>• Deliver measurably better service quality</p>
+                            <p>• Reduce operational costs through optimisation</p>
+                            <p>• Meet ESG reporting requirements</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">For Corporate FM Teams</div>
+                        <div class="card-content">
+                            <p><em>"Get the insights your board wants without the IT project"</em></p>
+                            <p>• Prove ROI of facilities spend to senior management</p>
+                            <p>• Optimise costs without sacrificing service quality</p>
+                            <p>• Meet sustainability and compliance requirements</p>
+                            <p>• Make data-driven space planning decisions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <div class="cta-content">
+                        <div class="cta-title">The Datore Value Proposition</div>
+                        <div class="cta-highlight">"Why spend 2 years and £500k+ building what we can deliver in 60 days for a fraction of the cost?"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="qualifying" class="section">
+            <h2 class="section-title">
+                <div class="section-icon">❓</div>
+                Qualifying Questions
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <div class="highlight-text">Target Profile: FM Service Providers (£10-£150M Turnover)</div>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Opening Qualification - Company Size & Revenue</div>
+                    <ul class="question-list">
+                        <li class="question-item">"What's your annual turnover, roughly? Are you in the £10-150 million range?"</li>
+                        <li class="question-item">"How many clients do you serve across how many sites?"</li>
+                        <li class="question-item">"Are you competing for contracts against the big players like Mitie, Sodexo, or CBRE?"</li>
+                    </ul>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Current Data Situation</div>
+                    <ul class="question-list">
+                        <li class="question-item">"Where do you currently store your operational data - schedules, timesheets, quality checks?"</li>
+                        <li class="question-item">"How many different systems do your teams use day-to-day?" <em>(Looking for 3+ systems)</em></li>
+                        <li class="question-item">"When a client asks for performance data, how long does it take your team to pull that together?"</li>
+                        <li class="question-item">"Do you have anyone whose job it is to analyse data and spot trends, or is everyone too busy delivering services?"</li>
+                    </ul>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Silo'd Data Indicators</div>
+                    <ul class="question-list">
+                        <li class="question-item">"Are your cleaning schedules in one system, maintenance records in another, and financials somewhere else?"</li>
+                        <li class="question-item">"Can you easily see which sites are performing best and worst across all your services?"</li>
+                        <li class="question-item">"If I asked you which of your teams is most efficient, would you know that off the top of your head?"</li>
+                        <li class="question-item">"Do your supervisors have to use different apps/systems to manage different aspects of their work?"</li>
+                    </ul>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Customer Pressure & Competitive Challenges</div>
+                    <ul class="question-list">
+                        <li class="question-item">"Are your clients asking for more detailed reporting than they used to?"</li>
+                        <li class="question-item">"Do you find clients want real-time updates on service delivery rather than monthly reports?"</li>
+                        <li class="question-item">"Are you losing tenders to competitors who can demonstrate better data capabilities?"</li>
+                        <li class="question-item">"When you're pitching for new business, do prospects ask about your technology capabilities?"</li>
+                    </ul>
+                </div>
+
+                <div class="question-group">
+                    <div class="question-group-title">Investment & Growth Readiness</div>
+                    <ul class="question-list">
+                        <li class="question-item">"Are you looking to grow into larger contracts or expand into new sectors?"</li>
+                        <li class="question-item">"What would it mean for your business if you could compete on equal terms with the big players?"</li>
+                        <li class="question-item">"Have you looked into building your own analytics team, or is that too expensive?"</li>
+                        <li class="question-item">"If there was a way to get enterprise-level data capabilities for the cost of a junior analyst, would that interest you?"</li>
+                    </ul>
+                </div>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">PERFECT PROSPECT Indicators:</h3>
+                
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <div class="check-icon">✓</div>
+                        <div><strong>Revenue:</strong> £10-150M FM service provider</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon">✓</div>
+                        <div><strong>Data Silos:</strong> 3+ disconnected systems, manual reporting</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon">✓</div>
+                        <div><strong>Client Pressure:</strong> Demands for better reporting, losing to data-savvy competitors</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon">✓</div>
+                        <div><strong>Growth Ambitions:</strong> Wants to compete for larger contracts</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon">✓</div>
+                        <div><strong>Decision Maker:</strong> Owner, MD, Operations Director with budget authority</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon">✓</div>
+                        <div><strong>Pain Recognition:</strong> Acknowledges data could help but thinks analytics is too expensive/complex</div>
+                    </li>
+                </ul>
+
+                <h3 style="font-size: 24px; font-weight: 600; margin: 30px 0 20px; color: #12224B;">RED FLAGS (Disqualify):</h3>
+                
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <div class="check-icon cross-icon">✗</div>
+                        <div>Revenue under £10M (too small) or over £150M (different solution needed)</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon cross-icon">✗</div>
+                        <div>Already has dedicated data team or advanced analytics</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon cross-icon">✗</div>
+                        <div>No competitive pressure or growth ambitions</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon cross-icon">✗</div>
+                        <div>Not the decision maker and can't get to them</div>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="check-icon cross-icon">✗</div>
+                        <div>Just signed long-term contracts with no review planned</div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <div class="cta-content">
+                <div class="cta-title">Quick Reference: Target Customer Profile</div>
+                <div class="cta-subtitle">Perfect Prospect = FM Service Provider with:</div>
+                <div class="cta-highlight">"Enterprise-level data capabilities without enterprise costs - compete with the big players without their overheads"</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Datore. All rights reserved. | Your New Data Team, On-Demand</p>
+    </div>
+</body>
+</html>
