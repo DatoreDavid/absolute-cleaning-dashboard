@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corps Security - Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #6B0F1A 0%, #8B1538 50%, #A91D3A 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .partnership-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .corps-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .corps-badge {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #6B0F1A, #A91D3A);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+
+        .corps-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .corps-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #6B0F1A;
+            line-height: 1.2;
+        }
+
+        .partnership-tagline {
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .partnership-x {
+            font-size: 20px;
+            font-weight: 300;
+            color: #999;
+            margin: 0 8px;
+        }
+
+        .sky-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sky-badge {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0072C6, #00A8E1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+
+        .sky-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0072C6;
+        }
+
+        .header-date {
+            text-align: right;
+            color: #666;
+        }
+
+        .header-date-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .header-date-sub {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #6B0F1A, #A91D3A);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 3px solid #A91D3A;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #6B0F1A;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 200px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, #6B0F1A, #A91D3A);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 8px 10px;
+            font-size: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .status-complete {
+            background: #d4edda;
+            color: #155724;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .location-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .location-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .location-name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .location-percent {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .mini-chart {
+            position: relative;
+            height: 60px;
+        }
+
+        .final-chart {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-chart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #11998e, #38ef7d, #4ecdc4);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-title-large {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .chart-subtitle {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .chart-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #11998e;
+        }
+
+        .stat-text {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modern-chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .summary-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .progress-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .progress-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .progress-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .progress-value {
+            font-size: 12px;
+            font-weight: 700;
+            color: #11998e;
+        }
+
+        .progress-bar-modern {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill-modern {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .final-chart-wrapper {
+            position: relative;
+            height: 250px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-row {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+            
+            .stat-value {
+                font-size: 16px;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Simplified Header -->
+        <div class="header">
+            <div class="partnership-section">
+                <div class="corps-logo">
+                    <div class="corps-badge">CS</div>
+                    <div class="corps-info">
+                        <div class="corps-text">CORPS SECURITY</div>
+                        <div class="partnership-tagline">Security Partnership Excellence</div>
+                    </div>
+                </div>
+                <div class="partnership-x">×</div>
+                <div class="sky-logo">
+                    <div class="sky-badge">SKY</div>
+                    <div class="sky-text">SKY</div>
+                </div>
+            </div>
+            <div class="header-date">
+                <div class="header-date-title">Mobilisation Dashboard</div>
+                <div class="header-date-sub">Updated: Sept 26, 2025</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Mobilisation Plan Tasks -->
+        <div class="section">
+            <div class="section-header">Mobilisation Plan Tasks</div>
+            
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">75</div>
+                    <div class="stat-label">Total Tasks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">66</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Open</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">On Hold</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">88%</div>
+                    <div class="stat-label">Complete</div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Task Status Overview</div>
+                    <div class="chart-wrapper">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Department Completion</div>
+                    <div class="chart-wrapper">
+                        <canvas id="departmentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Task Description</th>
+                            <th>Status</th>
+                            <th>Due</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Health & Safety</td>
+                            <td>Risk Assessment & share with Customer</td>
+                            <td><span class="status-complete">Complete</span></td>
+                            <td>16/02</td>
+                        </tr>
+                        <tr>
+                            <td>Sales</td>
+                            <td>Validate TUPE EU to Cost Submitted</td>
+                            <td><span class="status-complete">Complete</span></td>
+                            <td>09/02</td>
+                        </tr>
+                        <tr>
+                            <td>Business Support</td>
+                            <td>Upload all doc from CYSO portal</td>
+                            <td><span class="status-complete">Complete</span></td>
+                            <td>23/02</td>
+                        </tr>
+                        <tr>
+                            <td>HR</td>
+                            <td>TUPE EU Received (Saved in Folder)</td>
+                            <td><span class="status-complete">Complete</span></td>
+                            <td>02/02</td>
+                        </tr>
+                        <tr>
+                            <td>Technology</td>
+                            <td>Setup EDDB, TT Patrols & Site folder</td>
+                            <td><span class="status-complete">Complete</span></td>
+                            <td>16/02</td>
+                        </tr>
+                        <tr>
+                            <td>Operations</td>
+                            <td>Set up Site Folder (Corps Branded)</td>
+                            <td><span class="status-pending">In Progress</span></td>
+                            <td>23/02</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 2: Tasks Per Location -->
+        <div class="section">
+            <div class="section-header">Mobilisation Tasks Per Location</div>
+            
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">Total Colleagues</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1</div>
+                    <div class="stat-label">Outstanding</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Welcome Packs Completion</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">96%</div>
+                    <div class="stat-label">Consultations Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">96%</div>
+                    <div class="stat-label">SIA Licence Checks Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">ID Cards Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">96%</div>
+                    <div class="stat-label">Uniforms Order & Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Final Welcome Letter Issued</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">93%</div>
+                    <div class="stat-label">Legal Right To Work Checks</div>
+                </div>
+            </div>
+
+            <!-- Stage-specific charts -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Colleagues Status</div>
+                    <div class="chart-wrapper">
+                        <canvas id="colleaguesChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Welcome Packs</div>
+                    <div class="chart-wrapper">
+                        <canvas id="welcomePacksChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">1st Consultation</div>
+                    <div class="chart-wrapper">
+                        <canvas id="consultationChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">SIA Checks</div>
+                    <div class="chart-wrapper">
+                        <canvas id="siaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">LRTW</div>
+                    <div class="chart-wrapper">
+                        <canvas id="lrtwChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Final Welcome Letter</div>
+                    <div class="chart-wrapper">
+                        <canvas id="finalLetterChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-header">
+                        <div class="location-name">Barnsley</div>
+                        <div class="location-percent">100%</div>
+                    </div>
+                    <div class="mini-chart">
+                        <canvas id="barnsleyChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-header">
+                        <div class="location-name">Bristol</div>
+                        <div class="location-percent">99%</div>
+                    </div>
+                    <div class="mini-chart">
+                        <canvas id="bristolChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-header">
+                        <div class="location-name">Blackburn</div>
+                        <div class="location-percent">100%</div>
+                    </div>
+                    <div class="mini-chart">
+                        <canvas id="blackburnChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-header">
+                        <div class="location-name">Forest Gate</div>
+                        <div class="location-percent">94%</div>
+                    </div>
+                    <div class="mini-chart">
+                        <canvas id="forestChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modern Overall Progress Charts -->
+            <div class="final-chart">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title-large">Overall Colleagues Status</div>
+                        <div class="chart-subtitle">Completion progress across all mobilisation stages</div>
+                    </div>
+                    <div class="chart-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">98.3%</div>
+                            <div class="stat-text">Avg Complete</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">7/7</div>
+                            <div class="stat-text">Stages</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="final-chart-wrapper">
+                    <canvas id="overallChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Modern Department Summary -->
+            <div class="modern-chart-grid" style="margin-top: 20px;">
+                <div class="summary-card">
+                    <div class="summary-title">
+                        <div class="summary-icon">✓</div>
+                        Top Performing Stages
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">Final Welcome Letter</div>
+                            <div class="progress-value">100%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">SIA Checks</div>
+                            <div class="progress-value">100%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">Welcome Letter</div>
+                            <div class="progress-value">100%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">ID Cards</div>
+                            <div class="progress-value">98.4%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 98.4%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-title">
+                        <div class="summary-icon">⚠</div>
+                        Areas Needing Attention
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">LRTW Checks</div>
+                            <div class="progress-value">96.9%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 96.9%; background: linear-gradient(90deg, #ffa726, #ff6b6b);"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">1st Consultation</div>
+                            <div class="progress-value">98.4%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 98.4%; background: linear-gradient(90deg, #ffa726, #ffb84d);"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">Uniform Delivery</div>
+                            <div class="progress-value">98.4%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 98.4%; background: linear-gradient(90deg, #ffa726, #ffb84d);"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <div class="progress-name">Recruitment Process</div>
+                            <div class="progress-value">100%</div>
+                        </div>
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill-modern" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js responsive configuration
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = false;
+
+        // Status Pie Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Open', 'On Hold'],
+                datasets: [{
+                    data: [66, 4, 1],
+                    backgroundColor: ['#11998e', '#ff6b6b', '#ffa726'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { 
+                            boxWidth: 12, 
+                            font: { size: 11 },
+                            padding: 10
+                        }
+                    }
+                },
+                cutout: '50%'
+            }
+        });
+
+        // Department Chart
+        new Chart(document.getElementById('departmentChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Operations', 'HR', 'General', 'Sales', 'Business Support', 'Technology', 'Health & Safety', 'Uniforms'],
+                datasets: [{
+                    label: 'Completion %',
+                    data: [81.25, 81.82, 90.00, 77.78, 100, 83.33, 100, 100],
+                    backgroundColor: '#4A90E2',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            },
+                            font: { size: 10 }
+                        }
+                    },
+                    x: { 
+                        ticks: { 
+                            font: { size: 10 },
+                            maxRotation: 45
+                        } 
+                    }
+                },
+                plugins: { 
+                    legend: { 
+                        display: true,
+                        labels: { font: { size: 11 } }
+                    } 
+                }
+            }
+        });
+
+        // Create location-based completion charts
+        function createLocationChart(canvasId, title, completionData, outstandingData) {
+            new Chart(document.getElementById(canvasId), {
+                type: 'bar',
+                data: {
+                    labels: ['Barnsley', 'Bristol', 'Blackburn', 'Forest Gate'],
+                    datasets: [
+                        {
+                            label: 'Completion %',
+                            data: completionData,
+                            backgroundColor: '#11998e'
+                        },
+                        {
+                            label: 'Outstanding %',
+                            data: outstandingData,
+                            backgroundColor: '#ffa726'
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100,
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                },
+                                font: { size: 10 }
+                            }
+                        },
+                        x: { 
+                            stacked: true,
+                            ticks: { font: { size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: { 
+                                boxWidth: 12, 
+                                font: { size: 10 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Colleagues Status Chart
+        createLocationChart('colleaguesChart', 'Colleagues Status', [100, 100, 100, 94.44], [0, 0, 0, 5.56]);
+
+        // Welcome Packs Chart  
+        createLocationChart('welcomePacksChart', 'Welcome Packs', [100, 100, 100, 100], [0, 0, 0, 0]);
+
+        // 1st Consultation Chart
+        createLocationChart('consultationChart', '1st Consultation', [100, 100, 100, 81.11], [0, 0, 0, 18.89]);
+
+        // SIA Checks Chart
+        createLocationChart('siaChart', 'SIA Checks', [100, 100, 100, 100], [0, 0, 0, 0]);
+
+        // LRTW Chart
+        createLocationChart('lrtwChart', 'LRTW', [100, 100, 100, 86.67], [0, 0, 0, 13.33]);
+
+        // Final Welcome Letter Chart
+        createLocationChart('finalLetterChart', 'Final Welcome Letter', [100, 100, 100, 100], [0, 0, 0, 0]);
+
+        // Location Mini Charts
+        function createMiniChart(id, data) {
+            new Chart(document.getElementById(id), {
+                type: 'bar',
+                data: {
+                    labels: ['Welcome', 'Consult', 'SIA', 'LRTW', 'Final'],
+                    datasets: [{
+                        label: 'Completion %',
+                        data: data,
+                        backgroundColor: ['#11998e', '#38ef7d', '#4ecdc4', '#45b7d1', '#96ceb4']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { display: false, beginAtZero: true, max: 100 },
+                        x: { display: false }
+                    },
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        createMiniChart('barnsleyChart', [100, 100, 100, 100, 100]);
+        createMiniChart('bristolChart', [100, 98.44, 100, 96.88, 100]);
+        createMiniChart('blackburnChart', [100, 100, 100, 100, 100]);
+        createMiniChart('forestChart', [100, 81.11, 100, 86.67, 100]);
+
+        // Overall Colleagues Status Chart
+        new Chart(document.getElementById('overallChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Final Welcome', 'SIA Checks', 'Welcome Letter', '1st Consultation', 'ID Cards', 'Uniform', 'LRTW'],
+                datasets: [
+                    {
+                        label: 'Completion %',
+                        data: [100, 100, 100, 98.44, 98.44, 98.44, 96.88],
+                        backgroundColor: '#11998e'
+                    },
+                    {
+                        label: 'Outstanding %', 
+                        data: [0, 0, 0, 1.56, 1.56, 1.56, 3.12],
+                        backgroundColor: '#ffa726'
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        stacked: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: { font: { size: 11 } }
+                    }
+                },
+                plugins: { 
+                    legend: { 
+                        display: true,
+                        labels: { font: { size: 11 } }
+                    } 
+                }
+            }
+        });
+    </script>
+</body>
+</html>
